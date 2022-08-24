@@ -24,11 +24,7 @@ public class UsersController {
     @GetMapping()
     public String printUsers(@RequestParam(value = "id", required = false, defaultValue = "0") long id,
                              ModelMap model) {
-        List<User> usersList = userService.getAllUsers();
-        if (id != 0) {
-            int indexId = usersList.stream().map(User::getId).toList().indexOf(id);
-            usersList = (indexId != -1) ? List.of(usersList.get(indexId)) : usersList;
-        }
+        List<User> usersList = (id == 0) ? userService.getAllUsers() : List.of(userService.findUserById(id));
         model.addAttribute("users", usersList);
         return "users";
     }
