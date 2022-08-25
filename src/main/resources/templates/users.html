@@ -9,7 +9,7 @@
 
 <div align="center">
     <h1>User management</h1>
-    <form method="get" th:action="@{/users}">
+    <form method="get" th:action="@{/users/search}">
         <input type="number" name="id" />
         <input type="submit" value="Search" />
     </form>
@@ -35,12 +35,12 @@
                 <td th:utext="${user.getEmail()}"></td>
                 <td th:utext="${user.getAge()}"></td>
                 <td>
-                    <a th:href="@{users/edit/{userId}(userId=${user.getId()})}">edit </a>
-                    <a th:href="@{users/delete/{userId}(userId=${user.getId()})}">delete</a>
+                    <a th:href="@{/users/edit/{userId}(userId=${user.getId()})}">edit </a>
+                    <a th:href="@{/users/delete/{userId}(userId=${user.getId()})}">delete</a>
                 </td>
             </tr>
         </table>
-        <h3><a th:href="@{users}">Main page</a></h3>
+        <h3><a th:href="@{/users}">Main page</a></h3>
     </div>
 </body>
 </html>

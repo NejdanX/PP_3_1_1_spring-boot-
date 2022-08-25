@@ -3,6 +3,7 @@ package ru.javamentor.springmvcwithboot.dao;
 import ru.javamentor.springmvcwithboot.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao {
 
@@ -14,5 +15,5 @@ public interface UserDao {
 
     List<User> getAllUsers();
 
-    User findUserById(long id);
+    Optional<User> findUserById(long id);
 }

@@ -22,10 +22,16 @@ public class UsersController {
     }
 
     @GetMapping()
-    public String printUsers(@RequestParam(value = "id", required = false, defaultValue = "0") long id,
-                             ModelMap model) {
-        List<User> usersList = (id == 0) ? userService.getAllUsers() : List.of(userService.findUserById(id));
+    public String printUsers(ModelMap model) {
+        List<User> usersList = userService.getAllUsers();
         model.addAttribute("users", usersList);
+        return "users";
+    }
+
+    @GetMapping("search")
+    public String printUser(@RequestParam(value = "id", required = false, defaultValue = "0") long id,
+                            ModelMap model) {
+        model.addAttribute("users", List.of(userService.findUserById(id)));
         return "users";
     }
 

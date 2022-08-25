@@ -8,6 +8,7 @@ import ru.javamentor.springmvcwithboot.model.User;
 
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(long id) {
-         return userDao.findUserById(id);
+        Optional<User> user = userDao.findUserById(id);
+        return user.orElse(new User());
     }
 }

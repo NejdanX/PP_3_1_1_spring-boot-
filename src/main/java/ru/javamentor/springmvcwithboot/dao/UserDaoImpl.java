@@ -6,6 +6,7 @@ import ru.javamentor.springmvcwithboot.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -15,9 +16,8 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
     @Override
-    public User findUserById(long id) {
-        User user = entityManager.find(User.class, id);
-        return (user != null) ? user : new User();
+    public Optional<User> findUserById(long id) {
+        return Optional.ofNullable(entityManager.find(User.class, id));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(long id) {
-        entityManager.remove(findUserById(id));
+        entityManager.remove(findUserById(id).orElseThrow());
     }
 
     @Override
